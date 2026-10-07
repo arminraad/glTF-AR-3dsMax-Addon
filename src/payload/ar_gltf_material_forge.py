@@ -9,7 +9,7 @@ from pymxs import runtime as rt
 
 
 APP_NAME = "AR glTF Material Forge"
-VERSION = "1.3.0"
+VERSION = "1.3.1"
 ROOT = Path(__file__).resolve().parent
 SCRIPTS_DIR = ROOT / "scripts"
 ICONS_DIR = ROOT / "icons"
@@ -51,7 +51,7 @@ class ForgeTitleBar(QtWidgets.QFrame):
         self._window = window
         self._drag_offset = None
         self.setObjectName("ForgeTitleBar")
-        self.setFixedHeight(54)
+        self.setFixedHeight(50)
 
         row = QtWidgets.QHBoxLayout(self)
         row.setContentsMargins(18, 0, 10, 0)
@@ -106,18 +106,18 @@ class ToolCard(QtWidgets.QFrame):
         super().__init__(parent)
         self.setObjectName("ForgeCard")
         self.setCursor(QtCore.Qt.CursorShape.PointingHandCursor)
-        self.setFixedHeight(108)
+        self.setFixedHeight(94)
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_Hover, True)
 
         row = QtWidgets.QHBoxLayout(self)
-        row.setContentsMargins(18, 15, 18, 15)
+        row.setContentsMargins(16, 11, 16, 11)
         row.setSpacing(16)
 
         icon_box = QtWidgets.QLabel(self)
         icon_box.setObjectName("ForgeCardIcon")
         icon_box.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        icon_box.setPixmap(_icon(icon_name).pixmap(44, 44))
-        icon_box.setFixedSize(58, 58)
+        icon_box.setPixmap(_icon(icon_name).pixmap(38, 38))
+        icon_box.setFixedSize(52, 52)
         row.addWidget(icon_box, 0, QtCore.Qt.AlignmentFlag.AlignVCenter)
 
         text_col = QtWidgets.QVBoxLayout()
@@ -187,17 +187,17 @@ class MaterialForgePanel(QtWidgets.QDialog):
         header = QtWidgets.QFrame(shell)
         header.setObjectName("ForgeHeader")
         h = QtWidgets.QHBoxLayout(header)
-        h.setContentsMargins(26, 18, 26, 18)
+        h.setContentsMargins(24, 14, 24, 14)
         h.setSpacing(18)
 
         logo_wrap = QtWidgets.QFrame(header)
         logo_wrap.setObjectName("ForgeLogoWrap")
-        logo_wrap.setFixedSize(62, 62)
+        logo_wrap.setFixedSize(54, 54)
         logo_layout = QtWidgets.QVBoxLayout(logo_wrap)
         logo_layout.setContentsMargins(8, 8, 8, 8)
         logo = QtWidgets.QLabel(logo_wrap)
         logo.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        logo.setPixmap(_icon("app.svg").pixmap(44, 44))
+        logo.setPixmap(_icon("app.svg").pixmap(38, 38))
         logo_layout.addWidget(logo)
         h.addWidget(logo_wrap)
 
@@ -216,18 +216,12 @@ class MaterialForgePanel(QtWidgets.QDialog):
         h.addWidget(version, 0, QtCore.Qt.AlignmentFlag.AlignTop)
         shell_layout.addWidget(header)
 
-        scroll = QtWidgets.QScrollArea(shell)
-        scroll.setObjectName("ForgeScroll")
-        scroll.setWidgetResizable(True)
-        scroll.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
-        scroll.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        scroll.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
-
-        body = QtWidgets.QWidget(scroll)
+        # Deliberately no QScrollArea: every tool must remain visible at once.
+        body = QtWidgets.QWidget(shell)
         body.setObjectName("ForgeBody")
         layout = QtWidgets.QVBoxLayout(body)
-        layout.setContentsMargins(26, 20, 26, 20)
-        layout.setSpacing(15)
+        layout.setContentsMargins(26, 16, 26, 14)
+        layout.setSpacing(10)
 
         intro = QtWidgets.QLabel(
             "Run each operation independently. Conversion tools preserve Multi/Sub assignments and Material IDs.",
@@ -235,7 +229,7 @@ class MaterialForgePanel(QtWidgets.QDialog):
         )
         intro.setObjectName("ForgeIntro")
         intro.setWordWrap(True)
-        intro.setMinimumHeight(66)
+        intro.setMinimumHeight(52)
         layout.addWidget(intro)
 
         self._add_section(layout, "V-RAY WRAPPER CONVERSION", [
@@ -299,8 +293,7 @@ class MaterialForgePanel(QtWidgets.QDialog):
         ])
 
         layout.addStretch(1)
-        scroll.setWidget(body)
-        shell_layout.addWidget(scroll, 1)
+        shell_layout.addWidget(body, 1)
 
         footer = QtWidgets.QFrame(shell)
         footer.setObjectName("ForgeFooter")
@@ -324,8 +317,8 @@ class MaterialForgePanel(QtWidgets.QDialog):
 
         grid = QtWidgets.QGridLayout()
         grid.setContentsMargins(0, 0, 0, 0)
-        grid.setHorizontalSpacing(14)
-        grid.setVerticalSpacing(12)
+        grid.setHorizontalSpacing(12)
+        grid.setVerticalSpacing(8)
         grid.setColumnStretch(0, 1)
         grid.setColumnStretch(1, 1)
 
@@ -410,7 +403,7 @@ class MaterialForgePanel(QtWidgets.QDialog):
                 border-radius: 14px;
             }
             QLabel#ForgeTitle {
-                font-size: 24px;
+                font-size: 22px;
                 font-weight: 700;
                 color: #f8fbff;
             }
@@ -432,7 +425,7 @@ class MaterialForgePanel(QtWidgets.QDialog):
                 background: #0f1a2c;
                 border: 1px solid #2d4058;
                 border-radius: 12px;
-                padding: 14px 17px;
+                padding: 10px 14px;
                 font-size: 15px;
             }
             QLabel#ForgeSectionLabel {
@@ -440,8 +433,8 @@ class MaterialForgePanel(QtWidgets.QDialog):
                 font-size: 13px;
                 font-weight: 800;
                 letter-spacing: 1px;
-                padding-top: 5px;
-                padding-bottom: 2px;
+                padding-top: 2px;
+                padding-bottom: 0px;
             }
             QFrame#ForgeCard {
                 background: #111d2f;
@@ -459,7 +452,7 @@ class MaterialForgePanel(QtWidgets.QDialog):
             }
             QLabel#ForgeCardTitle {
                 color: #f7faff;
-                font-size: 17px;
+                font-size: 16px;
                 font-weight: 700;
                 background: transparent;
             }
@@ -470,7 +463,7 @@ class MaterialForgePanel(QtWidgets.QDialog):
             }
             QLabel#ForgeCardArrow {
                 color: #55e5f5;
-                font-size: 32px;
+                font-size: 28px;
                 font-weight: 400;
                 background: transparent;
             }
@@ -489,27 +482,6 @@ class MaterialForgePanel(QtWidgets.QDialog):
             QLabel#ForgeHint {
                 color: #899bb0;
                 font-size: 12px;
-            }
-            QScrollArea#ForgeScroll {
-                border: none;
-                background: #09111f;
-            }
-            QScrollBar:vertical {
-                background: #09111f;
-                width: 11px;
-                margin: 2px;
-            }
-            QScrollBar::handle:vertical {
-                background: #40546d;
-                min-height: 36px;
-                border-radius: 5px;
-            }
-            QScrollBar::handle:vertical:hover {
-                background: #5a718e;
-            }
-            QScrollBar::add-line:vertical,
-            QScrollBar::sub-line:vertical {
-                height: 0px;
             }
             """
         )
