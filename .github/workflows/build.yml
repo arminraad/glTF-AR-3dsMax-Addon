@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -31,3 +31,14 @@ jobs:
           name: AR-glTF-Material-Forge-v1.3.1
           path: dist/AR_glTF_Material_Forge_1_3_1.mzp
           if-no-files-found: error
+
+      - name: Commit built MZP to repository
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -f dist/AR_glTF_Material_Forge_1_3_1.mzp
+          if ! git diff --cached --quiet; then
+            git commit -m "Build AR glTF Material Forge v1.3.1 [skip ci]"
+            git push
+          fi
