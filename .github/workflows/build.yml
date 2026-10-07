@@ -28,6 +28,6 @@ jobs:
       - name: Upload MZP artifact
         uses: actions/upload-artifact@v4
         with:
-          name: AR-glTF-Material-Forge-v1.2.0
-          path: dist/AR_glTF_Material_Forge_1_2_0.mzp
+          name: AR-glTF-Material-Forge-v1.3.0
+          path: dist/AR_glTF_Material_Forge_1_3_0.mzp
           if-no-files-found: error
