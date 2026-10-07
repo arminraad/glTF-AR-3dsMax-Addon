@@ -46,9 +46,7 @@ AR glTF Material Forge groups the material cleanup steps used when preparing arc
 
 ## Safety model
 
-The conversion tools are designed around the architectural Multi/Sub workflow used by this project.
-
-Where applicable, they preserve:
+Where applicable, the tools preserve:
 
 - object material assignments;
 - Multi/Sub-Object slot positions;
@@ -58,54 +56,26 @@ Where applicable, they preserve:
 
 Some operations are intentionally destructive to intermediate material-map graphs. **Always save a copy of the .max scene before batch cleanup.**
 
-## Get the installable MZP
+## Download
 
-The repository contains the complete package source and a reproducible MZP builder.
-
-### Option 1 — Download the CI artifact
-
-Open the repository **Actions** tab, select the latest successful **Build MZP** run, and download:
-
-`AR-glTF-Material-Forge-v1.2.0`
-
-The artifact contains:
-
-`AR_glTF_Material_Forge_1_2_0.mzp`
-
-### Option 2 — Build locally
-
-Clone the repository and run:
-
-```bash
-python tools/build_mzp.py
-```
-
-The generated installer is written to:
+The current installable package is committed directly in the repository:
 
 ```text
 dist/AR_glTF_Material_Forge_1_2_0.mzp
 ```
 
-The generated `dist/` directory is intentionally not committed; GitHub Actions builds the same package automatically from the tracked source.
+You can also obtain a freshly built copy from the latest successful **Build MZP** workflow in GitHub Actions.
 
-## Install in 3ds Max
+## Installation
 
-After obtaining the MZP:
+1. Download `dist/AR_glTF_Material_Forge_1_2_0.mzp`.
+2. In 3ds Max, open **Scripting -> Run Script** and select the MZP file.
+3. Or drag the MZP file directly into the 3ds Max viewport.
+4. The installer copies the add-on files, registers the MacroScript, installs the startup loader, creates the toolbar, and opens the panel.
 
-1. In 3ds Max, open **Scripting -> Run Script** and select the MZP file.
-2. Or drag the MZP file directly into the 3ds Max viewport.
+After restarting 3ds Max, the toolbar is restored automatically.
 
-The installer:
-
-- copies the add-on to the current user's 3ds Max scripts directory;
-- registers the MacroScript;
-- installs the startup loader;
-- creates a persistent toolbar with the AR glTF Material Forge icon;
-- opens the panel immediately.
-
-After restarting 3ds Max, the toolbar is loaded again automatically.
-
-For detailed installation and troubleshooting, see [docs/INSTALLATION.md](docs/INSTALLATION.md).
+For detailed installation, update, uninstall, and troubleshooting instructions, see [docs/INSTALLATION.md](docs/INSTALLATION.md).
 
 ## Usage
 
@@ -114,13 +84,13 @@ For detailed installation and troubleshooting, see [docs/INSTALLATION.md](docs/I
 3. Click the **AR glTF Material Forge** toolbar button.
 4. Run the required tools individually.
 5. Review the result in Slate Material Editor and the viewport.
-6. Export your final glTF / GLB using your preferred 3ds Max export workflow.
+6. Export the prepared scene to glTF / GLB using your preferred 3ds Max exporter.
 
-A recommended operation order and detailed behavior for every tool are documented in [docs/USAGE.md](docs/USAGE.md).
+Detailed behavior for every operation is documented in [docs/USAGE.md](docs/USAGE.md).
 
 ## Suggested workflow
 
-For scenes already converted from V-Ray materials toward glTF materials, a typical cleanup sequence is:
+For scenes already converted from V-Ray materials toward glTF materials:
 
 1. Remove V-Ray 2Sided wrappers.
 2. Remove eligible V-Ray Blend wrappers.
@@ -133,20 +103,38 @@ For scenes already converted from V-Ray materials toward glTF materials, a typic
 
 Not every scene requires every step.
 
+## Build from source
+
+To rebuild the MZP locally:
+
+```bash
+python tools/build_mzp.py
+```
+
+Output:
+
+```text
+dist/AR_glTF_Material_Forge_1_2_0.mzp
+```
+
+The repository also contains a GitHub Actions workflow that performs the same build automatically.
+
 ## Repository structure
 
 ```text
 .
 ├─ README.md
 ├─ CHANGELOG.md
-├─ .github/
-│  └─ workflows/
-│     └─ build.yml
+├─ dist/
+│  └─ AR_glTF_Material_Forge_1_2_0.mzp
 ├─ docs/
 │  ├─ INSTALLATION.md
 │  └─ USAGE.md
 ├─ tools/
 │  └─ build_mzp.py
+├─ .github/
+│  └─ workflows/
+│     └─ build.yml
 └─ src/
    ├─ install.ms
    ├─ mzp.run
@@ -162,7 +150,7 @@ Not every scene requires every step.
 
 ## UI
 
-The panel is implemented with PySide6 and is intentionally:
+The panel is implemented with PySide6 and is:
 
 - fixed-size;
 - high-contrast;
@@ -172,7 +160,7 @@ The panel is implemented with PySide6 and is intentionally:
 
 ## Updating
 
-Build or download the newer MZP and install it over the existing version. The installer replaces the add-on files in the user scripts directory and reloads the panel.
+Install a newer MZP over the existing version. The installer replaces its own installed files and recreates the panel from the updated code.
 
 ## Uninstalling
 
