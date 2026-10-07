@@ -9,7 +9,7 @@ from pymxs import runtime as rt
 
 
 APP_NAME = "AR glTF Material Forge"
-VERSION = "1.2.0"
+VERSION = "1.3.0"
 ROOT = Path(__file__).resolve().parent
 SCRIPTS_DIR = ROOT / "scripts"
 ICONS_DIR = ROOT / "icons"
@@ -557,15 +557,40 @@ def show_panel():
     return panel
 
 
+def _configure_toolbar_action(action: QtGui.QAction) -> None:
+    # A toolbar created by an older module can survive an in-session update.
+    # Rebind its QAction to the freshly reloaded show_panel function so the
+    # button can never keep launching an older in-memory panel implementation.
+    try:
+        action.triggered.disconnect()
+    except Exception:
+        pass
+
+    action.setIcon(_icon("app.svg"))
+    action.setText(APP_NAME)
+    action.setObjectName(ACTION_OBJECT_NAME)
+    action.setToolTip(f"Open {APP_NAME} v{VERSION}")
+    action.setStatusTip("Open the AR glTF material preparation panel")
+    action.triggered.connect(show_panel)
+
+
 def ensure_toolbar():
     global _toolbar_ref
     main = _main_window()
 
     existing = main.findChild(QtWidgets.QToolBar, TOOLBAR_OBJECT_NAME)
     if existing is not None:
-        _toolbar_ref = existing
+        existing.setWindowTitle(APP_NAME)
         existing.setIconSize(QtCore.QSize(32, 32))
+
+        action = existing.findChild(QtGui.QAction, ACTION_OBJECT_NAME)
+        if action is None:
+            action = QtGui.QAction(existing)
+            existing.addAction(action)
+
+        _configure_toolbar_action(action)
         existing.show()
+        _toolbar_ref = existing
         return existing
 
     toolbar = QtWidgets.QToolBar(APP_NAME, main)
@@ -574,11 +599,8 @@ def ensure_toolbar():
     toolbar.setFloatable(True)
     toolbar.setIconSize(QtCore.QSize(32, 32))
 
-    action = QtGui.QAction(_icon("app.svg"), APP_NAME, toolbar)
-    action.setObjectName(ACTION_OBJECT_NAME)
-    action.setToolTip("Open AR glTF Material Forge")
-    action.setStatusTip("Open the AR glTF material preparation panel")
-    action.triggered.connect(show_panel)
+    action = QtGui.QAction(toolbar)
+    _configure_toolbar_action(action)
     toolbar.addAction(action)
 
     main.addToolBar(QtCore.Qt.ToolBarArea.TopToolBarArea, toolbar)
