@@ -1,45 +1,25 @@
 # Installation
 
-This guide covers package creation, installation, update, startup behavior, and removal of **AR glTF Material Forge**.
+This guide covers download, installation, update, startup behavior, removal, and troubleshooting for **AR glTF Material Forge**.
 
 ## Requirements
 
 - Autodesk 3ds Max 2027
 - Python / PySide6 environment supplied with 3ds Max
-- V-Ray is required only for operations that inspect V-Ray material classes
-- Windows user account with permission to write to the normal 3ds Max user script folders
+- V-Ray only for operations that inspect V-Ray material classes
+- Permission to write to the normal 3ds Max user script folders
 
-## Get the MZP package
+## Download the MZP
 
-The repository tracks the complete MZP source.
-
-### Download from GitHub Actions
-
-1. Open the repository **Actions** tab.
-2. Open the latest successful **Build MZP** workflow run.
-3. Download the artifact named `AR-glTF-Material-Forge-v1.2.0`.
-4. Extract the artifact ZIP.
-5. Use `AR_glTF_Material_Forge_1_2_0.mzp`.
-
-### Build locally
-
-Clone the repository and run:
-
-```bash
-python tools/build_mzp.py
-```
-
-The builder packages the contents of `src/` with the correct MZP root layout and creates:
+The current installer is stored directly in the repository:
 
 ```text
 dist/AR_glTF_Material_Forge_1_2_0.mzp
 ```
 
-No third-party Python packages are required to build the archive.
+A freshly built copy is also produced by the **Build MZP** workflow in GitHub Actions.
 
 ## Install from MZP
-
-Choose one of these methods.
 
 ### Method A — Run Script
 
@@ -112,13 +92,25 @@ At 3ds Max startup:
 To update:
 
 1. close the current panel;
-2. obtain the newer MZP from GitHub Actions or build it locally;
+2. download the newer MZP;
 3. run it in 3ds Max;
-4. allow it to replace the existing add-on files.
+4. let the installer replace its existing files.
 
-The installer uses replace semantics for its own files.
+A scene restart is normally not required. If an older in-memory panel is open, the updated application recreates it.
 
-A scene restart is normally not required. If an older in-memory panel is open, the application recreates the panel from the newly installed code.
+## Build locally
+
+To rebuild the package from repository source:
+
+```bash
+python tools/build_mzp.py
+```
+
+Output:
+
+```text
+dist/AR_glTF_Material_Forge_1_2_0.mzp
+```
 
 ## Uninstall
 
@@ -133,7 +125,7 @@ Close 3ds Max, then remove these installed items:
 
 After restarting 3ds Max, the add-on will no longer load.
 
-If the custom toolbar remains in the UI configuration, remove the toolbar from the 3ds Max interface customization or reset that toolbar layout.
+If the custom toolbar remains in the UI configuration, remove that toolbar from the 3ds Max interface customization.
 
 ## Troubleshooting
 
@@ -159,7 +151,7 @@ Re-running the MZP restores it.
 
 ### A V-Ray conversion tool reports no matching materials
 
-The tool only acts on the material classes it is designed for. For example:
+The tool only acts on the material classes it is designed for:
 
 - the 2Sided tool searches for `VRay2SidedMtl`;
 - the Blend tool searches for `VRayBlendMtl`.
