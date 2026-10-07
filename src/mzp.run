@@ -1,0 +1,6 @@
+name "AR glTF Material Forge"
+description "Larger fixed-size AR-oriented glTF material preparation toolkit for 3ds Max"
+version 1.2
+run "install.ms"
+drop "install.ms"
+clear temp
