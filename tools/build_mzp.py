@@ -10,7 +10,7 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
-DEFAULT_VERSION = "1.3.0"
+DEFAULT_VERSION = "1.3.1"
 
 
 def build(version: str = DEFAULT_VERSION) -> Path:
