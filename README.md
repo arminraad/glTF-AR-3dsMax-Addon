@@ -4,7 +4,7 @@ A compact material-preparation toolkit for **Autodesk 3ds Max** that cleans and 
 
 The add-on installs as a persistent 3ds Max toolbar button and opens a fixed-size PySide6 panel containing focused material conversion, cleanup, and viewport tools.
 
-> Current version: **v1.2.0**  
+> Current version: **v1.3.0**  
 > Current target: **3ds Max 2027**  
 > Primary workflow: **V-Ray scene materials -> simplified glTF-ready material graphs**
 
@@ -61,17 +61,21 @@ Some operations are intentionally destructive to intermediate material-map graph
 The current installable package is committed directly in the repository:
 
 ```text
-dist/AR_glTF_Material_Forge_1_2_0.mzp
+dist/AR_glTF_Material_Forge_1_3_0.mzp
 ```
 
 You can also obtain a freshly built copy from the latest successful **Build MZP** workflow in GitHub Actions.
 
-## Installation
+## Installation and updates
 
-1. Download `dist/AR_glTF_Material_Forge_1_2_0.mzp`.
-2. In 3ds Max, open **Scripting -> Run Script** and select the MZP file.
-3. Or drag the MZP file directly into the 3ds Max viewport.
-4. The installer copies the add-on files, registers the MacroScript, installs the startup loader, creates the toolbar, and opens the panel.
+1. Download `dist/AR_glTF_Material_Forge_1_3_0.mzp`.
+2. In 3ds Max, use **Scripting -> Run Script**, or drag the MZP directly into the viewport.
+3. The package opens a dedicated installer/updater window before changing any files.
+4. If the add-on is not installed, the primary action is **Install**.
+5. If an existing installation is detected, the primary action is **Update** and the installed version is shown.
+6. After Install/Update completes, the panel opens and the persistent toolbar button is rebound to the current code.
+
+The update process replaces the installed payload as a complete unit, refreshes the MacroScript/startup integration, reloads the Python module, and reconnects the existing toolbar action so an old toolbar button cannot keep launching an older in-memory panel.
 
 After restarting 3ds Max, the toolbar is restored automatically.
 
@@ -114,7 +118,7 @@ python tools/build_mzp.py
 Output:
 
 ```text
-dist/AR_glTF_Material_Forge_1_2_0.mzp
+dist/AR_glTF_Material_Forge_1_3_0.mzp
 ```
 
 The repository also contains a GitHub Actions workflow that performs the same build automatically.
@@ -126,7 +130,7 @@ The repository also contains a GitHub Actions workflow that performs the same bu
 ├─ README.md
 ├─ CHANGELOG.md
 ├─ dist/
-│  └─ AR_glTF_Material_Forge_1_2_0.mzp
+│  └─ AR_glTF_Material_Forge_1_3_0.mzp
 ├─ docs/
 │  ├─ INSTALLATION.md
 │  └─ USAGE.md
@@ -168,7 +172,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md#uninstall).
 
 ## Versioning
 
-Current package: **1.2.0**
+Current package: **1.3.0**
 
 See [CHANGELOG.md](CHANGELOG.md) for version history.
 
