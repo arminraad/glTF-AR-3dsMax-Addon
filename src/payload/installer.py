@@ -12,7 +12,7 @@ from pymxs import runtime as rt
 
 
 APP_NAME = "AR glTF Material Forge"
-PACKAGE_VERSION = "1.3.0"
+PACKAGE_VERSION = "1.3.1"
 PAYLOAD_DIR = Path(__file__).resolve().parent
 
 
