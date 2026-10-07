@@ -1,6 +1,6 @@
 /*
     AR glTF Material Forge - MZP Bootstrap
-    Version 1.3.0
+    Version 1.3.1
 
     Dragging/running the MZP opens the installer/updater UI.
     No files are changed until the user presses Install or Update.
