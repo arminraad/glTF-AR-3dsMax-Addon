@@ -1,6 +1,6 @@
 # Installation
 
-This guide covers installation, update, startup behavior, and removal of **AR glTF Material Forge**.
+This guide covers package creation, installation, update, startup behavior, and removal of **AR glTF Material Forge**.
 
 ## Requirements
 
@@ -9,13 +9,37 @@ This guide covers installation, update, startup behavior, and removal of **AR gl
 - V-Ray is required only for operations that inspect V-Ray material classes
 - Windows user account with permission to write to the normal 3ds Max user script folders
 
+## Get the MZP package
+
+The repository tracks the complete MZP source.
+
+### Download from GitHub Actions
+
+1. Open the repository **Actions** tab.
+2. Open the latest successful **Build MZP** workflow run.
+3. Download the artifact named `AR-glTF-Material-Forge-v1.2.0`.
+4. Extract the artifact ZIP.
+5. Use `AR_glTF_Material_Forge_1_2_0.mzp`.
+
+### Build locally
+
+Clone the repository and run:
+
+```bash
+python tools/build_mzp.py
+```
+
+The builder packages the contents of `src/` with the correct MZP root layout and creates:
+
+```text
+dist/AR_glTF_Material_Forge_1_2_0.mzp
+```
+
+No third-party Python packages are required to build the archive.
+
 ## Install from MZP
 
-Download the current package:
-
-`dist/AR_glTF_Material_Forge_1_2_0.mzp`
-
-Then choose one of these methods.
+Choose one of these methods.
 
 ### Method A — Run Script
 
@@ -88,7 +112,7 @@ At 3ds Max startup:
 To update:
 
 1. close the current panel;
-2. download the newer MZP;
+2. obtain the newer MZP from GitHub Actions or build it locally;
 3. run it in 3ds Max;
 4. allow it to replace the existing add-on files.
 
