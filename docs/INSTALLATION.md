@@ -14,26 +14,36 @@ This guide covers download, installation, update, startup behavior, removal, and
 The current installer is stored directly in the repository:
 
 ```text
-dist/AR_glTF_Material_Forge_1_2_0.mzp
+dist/AR_glTF_Material_Forge_1_3_0.mzp
 ```
 
 A freshly built copy is also produced by the **Build MZP** workflow in GitHub Actions.
 
-## Install from MZP
+## Install or update from MZP
 
 ### Method A — Run Script
 
 1. Open 3ds Max.
 2. Go to **Scripting -> Run Script**.
-3. Select `AR_glTF_Material_Forge_1_2_0.mzp`.
-4. Wait for the installation confirmation.
-5. The panel opens immediately.
+3. Select `AR_glTF_Material_Forge_1_3_0.mzp`.
+4. The installer/updater window opens before any files are changed.
 
 ### Method B — Drag and drop
 
 Drag the MZP file from Windows Explorer into the 3ds Max viewport.
 
-The same installer is executed.
+The same installer/updater window opens.
+
+### Installer state
+
+The package detects the current user installation automatically.
+
+- If no installation is found, the primary button is **Install**.
+- If an existing installation is found, the primary button is **Update**.
+- When possible, the installer also shows the currently installed version.
+- Version 1.3.0 writes an explicit `version.txt` marker for reliable future detection.
+
+No installed files are modified until you press **Install** or **Update**.
 
 ## What the installer adds
 
@@ -91,12 +101,16 @@ At 3ds Max startup:
 
 To update:
 
-1. close the current panel;
-2. download the newer MZP;
-3. run it in 3ds Max;
-4. let the installer replace its existing files.
+1. download the newer MZP;
+2. run it in 3ds Max or drag it into the viewport;
+3. confirm that the installer detects the existing version;
+4. press **Update**.
 
-A scene restart is normally not required. If an older in-memory panel is open, the updated application recreates it.
+During update, the add-on payload is replaced as a complete unit. The application module is then reloaded and the existing toolbar QAction is explicitly disconnected from the old in-memory callback and rebound to the newly loaded version.
+
+This fixes the case where installing a new MZP opened the new panel once, but the persistent toolbar button continued to launch the old panel.
+
+A 3ds Max restart is normally not required.
 
 ## Build locally
 
@@ -109,7 +123,7 @@ python tools/build_mzp.py
 Output:
 
 ```text
-dist/AR_glTF_Material_Forge_1_2_0.mzp
+dist/AR_glTF_Material_Forge_1_3_0.mzp
 ```
 
 ## Uninstall
