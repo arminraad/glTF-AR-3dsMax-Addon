@@ -1,0 +1,33 @@
+name: Build MZP
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Build MZP
+        run: python tools/build_mzp.py
+
+      - name: Upload MZP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AR-glTF-Material-Forge-v1.2.0
+          path: dist/AR_glTF_Material_Forge_1_2_0.mzp
+          if-no-files-found: error
