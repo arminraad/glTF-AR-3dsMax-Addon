@@ -1,4 +1,4 @@
-AR glTF Material Forge v1.2.0
+AR glTF Material Forge v1.3.0
 ================================
 
 This directory is the payload installed by the MZP package.
@@ -24,3 +24,8 @@ Material tools:
 
 Build the installer package from repository root with:
 python tools/build_mzp.py
+
+Installer/update behavior:
+- Install when no previous installation is detected.
+- Update when an existing installation is detected.
+- Toolbar callbacks are rebound after in-session updates.
