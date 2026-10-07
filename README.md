@@ -4,7 +4,7 @@ A compact material-preparation toolkit for **Autodesk 3ds Max** that cleans and 
 
 The add-on installs as a persistent 3ds Max toolbar button and opens a fixed-size PySide6 panel containing focused material conversion, cleanup, and viewport tools.
 
-> Current version: **v1.3.0**  
+> Current version: **v1.3.1**  
 > Current target: **3ds Max 2027**  
 > Primary workflow: **V-Ray scene materials -> simplified glTF-ready material graphs**
 
@@ -61,14 +61,14 @@ Some operations are intentionally destructive to intermediate material-map graph
 The current installable package is committed directly in the repository:
 
 ```text
-dist/AR_glTF_Material_Forge_1_3_0.mzp
+dist/AR_glTF_Material_Forge_1_3_1.mzp
 ```
 
 You can also obtain a freshly built copy from the latest successful **Build MZP** workflow in GitHub Actions.
 
 ## Installation and updates
 
-1. Download `dist/AR_glTF_Material_Forge_1_3_0.mzp`.
+1. Download `dist/AR_glTF_Material_Forge_1_3_1.mzp`.
 2. In 3ds Max, use **Scripting -> Run Script**, or drag the MZP directly into the viewport.
 3. The package opens a dedicated installer/updater window before changing any files.
 4. If the add-on is not installed, the primary action is **Install**.
@@ -118,7 +118,7 @@ python tools/build_mzp.py
 Output:
 
 ```text
-dist/AR_glTF_Material_Forge_1_3_0.mzp
+dist/AR_glTF_Material_Forge_1_3_1.mzp
 ```
 
 The repository also contains a GitHub Actions workflow that performs the same build automatically.
@@ -130,7 +130,7 @@ The repository also contains a GitHub Actions workflow that performs the same bu
 ├─ README.md
 ├─ CHANGELOG.md
 ├─ dist/
-│  └─ AR_glTF_Material_Forge_1_3_0.mzp
+│  └─ AR_glTF_Material_Forge_1_3_1.mzp
 ├─ docs/
 │  ├─ INSTALLATION.md
 │  └─ USAGE.md
@@ -156,7 +156,7 @@ The repository also contains a GitHub Actions workflow that performs the same bu
 
 The panel is implemented with PySide6 and is:
 
-- fixed-size;
+- fixed-size with every tool visible at once and no scroll area;
 - high-contrast;
 - icon-driven;
 - persistent through a 3ds Max toolbar button;
@@ -172,7 +172,7 @@ See [docs/INSTALLATION.md](docs/INSTALLATION.md#uninstall).
 
 ## Versioning
 
-Current package: **1.3.0**
+Current package: **1.3.1**
 
 See [CHANGELOG.md](CHANGELOG.md) for version history.
 
