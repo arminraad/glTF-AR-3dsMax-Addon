@@ -14,7 +14,7 @@ This guide covers download, installation, update, startup behavior, removal, and
 The current installer is stored directly in the repository:
 
 ```text
-dist/AR_glTF_Material_Forge_1_3_0.mzp
+dist/AR_glTF_Material_Forge_1_3_1.mzp
 ```
 
 A freshly built copy is also produced by the **Build MZP** workflow in GitHub Actions.
@@ -25,7 +25,7 @@ A freshly built copy is also produced by the **Build MZP** workflow in GitHub Ac
 
 1. Open 3ds Max.
 2. Go to **Scripting -> Run Script**.
-3. Select `AR_glTF_Material_Forge_1_3_0.mzp`.
+3. Select `AR_glTF_Material_Forge_1_3_1.mzp`.
 4. The installer/updater window opens before any files are changed.
 
 ### Method B — Drag and drop
@@ -41,7 +41,7 @@ The package detects the current user installation automatically.
 - If no installation is found, the primary button is **Install**.
 - If an existing installation is found, the primary button is **Update**.
 - When possible, the installer also shows the currently installed version.
-- Version 1.3.0 writes an explicit `version.txt` marker for reliable future detection.
+- Version 1.3.1 writes an explicit `version.txt` marker for reliable future detection.
 
 No installed files are modified until you press **Install** or **Update**.
 
@@ -123,7 +123,7 @@ python tools/build_mzp.py
 Output:
 
 ```text
-dist/AR_glTF_Material_Forge_1_3_0.mzp
+dist/AR_glTF_Material_Forge_1_3_1.mzp
 ```
 
 ## Uninstall
