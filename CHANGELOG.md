@@ -2,6 +2,14 @@
 
 All notable changes to AR glTF Material Forge are documented here.
 
+## 1.3.1 — 2026-10-07
+
+### Fixed
+
+- Removed the scroll area from the main panel completely.
+- Rebalanced card heights, header spacing, section spacing, and typography so all eight tools remain visible simultaneously inside the fixed-size panel.
+- The main panel no longer requires vertical scrolling at any supported UI state.
+
 ## 1.3.0 — 2026-10-07
 
 ### Added
