@@ -2,6 +2,21 @@
 
 All notable changes to AR glTF Material Forge are documented here.
 
+## 1.3.0 — 2026-10-07
+
+### Added
+
+- Added a dedicated installer/updater window that opens when the MZP is run or dropped into 3ds Max.
+- Added automatic installed-version detection.
+- Added explicit **Install** and **Update** states.
+- Added a persistent `version.txt` marker for future update detection.
+
+### Fixed
+
+- Fixed the persistent toolbar button continuing to call the old in-memory panel after an in-session update.
+- Existing toolbar actions are now disconnected from stale callbacks and rebound to the newly reloaded application module.
+- Updates now replace the installed payload as a complete unit to prevent stale files from older versions.
+
 ## 1.2.0 — 2026-10-07
 
 ### Changed
