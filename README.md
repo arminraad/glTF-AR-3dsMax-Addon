@@ -58,15 +58,39 @@ Where applicable, they preserve:
 
 Some operations are intentionally destructive to intermediate material-map graphs. **Always save a copy of the .max scene before batch cleanup.**
 
-## Installation
+## Get the installable MZP
 
-### Recommended: install the MZP package
+The repository contains the complete package source and a reproducible MZP builder.
 
-Download:
+### Option 1 — Download the CI artifact
 
-`dist/AR_glTF_Material_Forge_1_2_0.mzp`
+Open the repository **Actions** tab, select the latest successful **Build MZP** run, and download:
 
-Then use either method:
+`AR-glTF-Material-Forge-v1.2.0`
+
+The artifact contains:
+
+`AR_glTF_Material_Forge_1_2_0.mzp`
+
+### Option 2 — Build locally
+
+Clone the repository and run:
+
+```bash
+python tools/build_mzp.py
+```
+
+The generated installer is written to:
+
+```text
+dist/AR_glTF_Material_Forge_1_2_0.mzp
+```
+
+The generated `dist/` directory is intentionally not committed; GitHub Actions builds the same package automatically from the tracked source.
+
+## Install in 3ds Max
+
+After obtaining the MZP:
 
 1. In 3ds Max, open **Scripting -> Run Script** and select the MZP file.
 2. Or drag the MZP file directly into the 3ds Max viewport.
@@ -115,11 +139,14 @@ Not every scene requires every step.
 .
 ├─ README.md
 ├─ CHANGELOG.md
+├─ .github/
+│  └─ workflows/
+│     └─ build.yml
 ├─ docs/
 │  ├─ INSTALLATION.md
 │  └─ USAGE.md
-├─ dist/
-│  └─ AR_glTF_Material_Forge_1_2_0.mzp
+├─ tools/
+│  └─ build_mzp.py
 └─ src/
    ├─ install.ms
    ├─ mzp.run
@@ -145,7 +172,7 @@ The panel is implemented with PySide6 and is intentionally:
 
 ## Updating
 
-Install a newer MZP over the existing version. The installer replaces the add-on files in the user scripts directory and reloads the panel.
+Build or download the newer MZP and install it over the existing version. The installer replaces the add-on files in the user scripts directory and reloads the panel.
 
 ## Uninstalling
 
